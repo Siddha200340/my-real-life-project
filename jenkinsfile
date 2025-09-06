@@ -19,6 +19,15 @@
             }
         }
 
+        stage("Install Dependencies & Run Tests") {
+            steps {
+                bat '''
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+                pytest'''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat "docker build -t %DOCKER_IMAGE% ."
